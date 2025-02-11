@@ -65,7 +65,13 @@ git clone git@github.com:vvhg1/ticketstatus.git "$destination_path/ticketstatus"
 if [ $? -eq 0 ]; then
     echo "Repository cloned successfully to $destination_path/ticketstatus."
 else
-    echo "Failed to clone the repository. Please check your SSH configuration and access rights."
+    git clone https://github.com/vvhg1/ticketstatus.git "$destination_path/ticketstatus"
+    if [ $? -eq 0 ]; then
+        echo "Repository cloned successfully to $destination_path/ticketstatus."
+    else
+        echo "Failed to clone the repository. Please check your SSH configuration and access rights."
+        exit 1
+    fi
 fi
 
 # Ask the user if he wants an alias to execute the script
