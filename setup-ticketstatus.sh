@@ -114,7 +114,7 @@ cat <<EOF
 To authenticate GitHub CLI (gh) with a personal access token:
 1. Visit https://github.com/settings/tokens to create a new token.
 2. Choose 'Tokens(classic)' and click 'Generate new token'.
-3. Select the necessary scopes: 'admin:public_key', 'notifications', 'project', 'read:enterprise', 'repo', 'user', 'write:discussion'.
+3. Select the necessary scopes: 'admin:public_key', 'notifications', 'project', 'read:enterprise', 'read:org', 'repo', 'user', 'write:discussion'.
 4. Click 'Generate Token' and copy the token.
 5. Store the token securely (e.g., use a password manager).
 
