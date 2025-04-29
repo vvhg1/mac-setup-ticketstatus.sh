@@ -71,7 +71,7 @@ elif [[ "$ssh_choice" == "n" || "$ssh_choice" == "N" ]]; then
     if [ $? -eq 0 ]; then
         echo "Repository cloned successfully to $destination_path/ticketstatus."
     else
-        echo "Failed to clone the repository. Please check your SSH configuration and access rights."
+        echo "Failed to clone the repository. Please check your HTTPS configuration and access rights."
         exit 1
     fi
 else
