@@ -24,12 +24,8 @@ fi
 
 # Install required tools
 for tool in bash jq fzf gh; do
-    if ! command_exists $tool; then
-        echo "Installing $tool via Homebrew..."
-        brew install $tool
-    else
-        echo "$tool is already installed."
-    fi
+    echo "Installing $tool via Homebrew..."
+    brew install $tool
 done
 
 # Check if the GitHub email is set
@@ -61,10 +57,16 @@ fi
 
 # Clone the specific GitHub repository
 echo "Cloning repository github.com:vvhg1/ticketstatus.git to $destination_path..."
-git clone git@github.com:vvhg1/ticketstatus.git "$destination_path/ticketstatus"
-if [ $? -eq 0 ]; then
-    echo "Repository cloned successfully to $destination_path/ticketstatus."
-else
+read -p "Do you want to clone the repository using SSH? (y/n): " ssh_choice
+if [[ "$ssh_choice" == "y" || "$ssh_choice" == "Y" ]]; then
+    git clone git@github.com:vvhg1/ticketstatus.git "$destination_path/ticketstatus"
+    if [ $? -eq 0 ]; then
+        echo "Repository cloned successfully to $destination_path/ticketstatus."
+    else
+        echo "Failed to clone the repository. Please check your SSH configuration and access rights."
+        exit 1
+    fi
+elif [[ "$ssh_choice" == "n" || "$ssh_choice" == "N" ]]; then
     git clone https://github.com/vvhg1/ticketstatus.git "$destination_path/ticketstatus"
     if [ $? -eq 0 ]; then
         echo "Repository cloned successfully to $destination_path/ticketstatus."
@@ -72,6 +74,9 @@ else
         echo "Failed to clone the repository. Please check your SSH configuration and access rights."
         exit 1
     fi
+else
+    echo "Invalid choice. Please try again."
+    exit 1
 fi
 
 # Ask the user if he wants an alias to execute the script
