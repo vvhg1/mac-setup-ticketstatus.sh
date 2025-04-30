@@ -94,15 +94,24 @@ if [[ "$alias_choice" == "y" || "$alias_choice" == "Y" ]]; then
     # check if the .zsh_aliases file exists
     if [ -f ~/.zsh_aliases ]; then
         echo "Creating alias "tik" in .zsh_aliases..."
-        echo "alias tik=\"$bash_path -c 'export JIRA_API_TOKEN=\$JIRA_API_TOKEN; source $destination_path/ticketstatus/ticketcrossroad.sh; ticketcrossroad'\"" >>~/.zsh_aliases
+        cat <<EOF >>~/.zsh_aliases
+alias tik='${bash_path} -c '\''export JIRA_API_TOKEN=\$JIRA_API_TOKEN; source ${destination_path}/ticketstatus/ticketcrossroad.sh; ticketcrossroad "\$@"'\'' --'
+EOF
+        # echo "alias tik=\"$bash_path -c 'export JIRA_API_TOKEN=\$JIRA_API_TOKEN; source $destination_path/ticketstatus/ticketcrossroad.sh; ticketcrossroad'\"" >>~/.zsh_aliases
     elif [ -f ~/.zshrc ]; then
         echo "Creating alias "tik" in .zshrc..."
-        echo "alias tik=\"$bash_path -c 'export JIRA_API_TOKEN=\$JIRA_API_TOKEN; source $destination_path/ticketstatus/ticketcrossroad.sh; ticketcrossroad'\"" >>~/.zshrc
+        cat <<EOF >>~/.zshrc
+alias tik='${bash_path} -c '\''export JIRA_API_TOKEN=\$JIRA_API_TOKEN; source ${destination_path}/ticketstatus/ticketcrossroad.sh; ticketcrossroad "\$@"'\'' --'
+EOF
+        # echo "alias tik=\"$bash_path -c 'export JIRA_API_TOKEN=\$JIRA_API_TOKEN; source $destination_path/ticketstatus/ticketcrossroad.sh; ticketcrossroad'\"" >>~/.zshrc
     else
         echo "No .zshrc or .zsh_aliases file found. Creating .zshrc..."
         touch ~/.zshrc
         echo "Creating alias "tik" in .zshrc..."
-        echo "alias tik=\"$bash_path -c 'export JIRA_API_TOKEN=\$JIRA_API_TOKEN; source $destination_path/ticketstatus/ticketcrossroad.sh; ticketcrossroad'\"" >>~/.zshrc
+        cat <<EOF >>~/.zshrc
+alias tik='${bash_path} -c '\''export JIRA_API_TOKEN=\$JIRA_API_TOKEN; source ${destination_path}/ticketstatus/ticketcrossroad.sh; ticketcrossroad "\$@"'\'' --'
+EOF
+        # echo "alias tik=\"$bash_path -c 'export JIRA_API_TOKEN=\$JIRA_API_TOKEN; source $destination_path/ticketstatus/ticketcrossroad.sh; ticketcrossroad'\"" >>~/.zshrc
     fi
     echo "Alias created. You can now run the script using 'tik'."
 fi
